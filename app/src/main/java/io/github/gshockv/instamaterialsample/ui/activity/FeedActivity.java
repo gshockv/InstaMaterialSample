@@ -49,7 +49,14 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
     }
 
     private void setupFeed() {
-        recyclerFeed.setLayoutManager(new LinearLayoutManager(this));
+        final LinearLayoutManager lm = new LinearLayoutManager(this) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 300;
+            }
+        };
+
+        recyclerFeed.setLayoutManager(lm);
         feedAdapter = new FeedAdapter(this);
         recyclerFeed.setAdapter(feedAdapter);
         feedAdapter.setOnFeedItemClickListener(this);
@@ -123,6 +130,11 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
 
         startActivity(intent);
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onLikeClick(View view, int position) {
+        // Coming soon . . .
     }
 }
 

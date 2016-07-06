@@ -8,7 +8,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_gravity="center"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    tools:layout_gravity="top">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,6 +31,29 @@
             android:id="@+id/imageViewFeedBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <!-- action buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <ImageButton
+                android:id="@+id/buttonLike"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_feed_action"
+                android:src="@drawable/ic_heart_outline_grey"/>
+            <ImageButton
+                android:id="@+id/buttonComments"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_feed_action"
+                android:src="@drawable/ic_comment_outline_grey"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

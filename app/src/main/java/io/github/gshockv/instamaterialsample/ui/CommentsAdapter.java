@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import io.github.gshockv.instamaterialsample.R;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder> {
-    private static final int TOTAL_COMMENTS = 3;
+    private static final int TOTAL_COMMENTS = 15;
 
     private final Context context;
     private int itemsCount = 0;

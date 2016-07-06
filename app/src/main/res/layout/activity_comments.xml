@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="@dimen/defaultElevation">
+        android:elevation="@dimen/defaultElevation"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <ImageView
             android:id="@+id/imageViewLogo"
@@ -41,17 +42,27 @@
             android:layout_height="wrap_content"
             android:background="@color/bgComments"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
             android:elevation="@dimen/defaultElevation">
 
             <EditText
+                android:id="@+id/editComment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <Button
+
+            <io.github.gshockv.instamaterialsample.ui.view.SendCommentButton
                 android:id="@+id/buttonSendComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send"/>
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/btn_send_comment"
+                android:elevation="4dp"/>
 
         </LinearLayout>
 

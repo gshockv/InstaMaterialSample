@@ -5,7 +5,12 @@
     <color name="colorPrimaryDark">#21425d</color>
     <color name="colorAccent">#01bcd5</color>
 
+    <color name="fabColorShadow">#44000000</color>
+
     <color name="buttonDefaultLightNormal">#00000000</color>
     <color name="buttonDefaultLightPressed">#40ffffff</color>
     <color name="bgComments">#ffffff</color>
+    <color name="buttonSendNormal">#26c714</color>
+    <color name="buttonSendPressed">#1f9612</color>
+
 </resources>

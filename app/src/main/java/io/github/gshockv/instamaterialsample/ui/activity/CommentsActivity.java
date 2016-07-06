@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.facebook.rebound.ui.Util;
@@ -23,14 +26,17 @@ import butterknife.OnClick;
 import io.github.gshockv.instamaterialsample.R;
 import io.github.gshockv.instamaterialsample.Utils;
 import io.github.gshockv.instamaterialsample.ui.CommentsAdapter;
+import io.github.gshockv.instamaterialsample.ui.view.SendCommentButton;
 
-public class CommentsActivity extends AppCompatActivity {
+public class CommentsActivity extends AppCompatActivity implements SendCommentButton.OnSendClickListener {
     static final String ARG_DRAWING_START_LOCATION = "arg.drawing.start.location";
 
     @Bind(R.id.appToolbar) Toolbar appToolbar;
     @Bind(R.id.recycler_comments) RecyclerView recyclerComments;
     @Bind(R.id.contentRoot) LinearLayout contentRoot;
     @Bind(R.id.addCommentBlock) LinearLayout addCommentBlock;
+    @Bind(R.id.editComment) EditText editComment;
+    @Bind(R.id.buttonSendComment) SendCommentButton buttonSend;
 
     private CommentsAdapter commentsAdapter;
 
@@ -44,6 +50,8 @@ public class CommentsActivity extends AppCompatActivity {
 
         setupToolbar();
         setupCommentsList();
+
+        buttonSend.setOnSendClickListener(this);
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         if (savedInstanceState == null) {
@@ -68,7 +76,7 @@ public class CommentsActivity extends AppCompatActivity {
     private void startIntroAnimation() {
         contentRoot.setScaleY(0.1f);
         contentRoot.setPivotY(drawingStartLocation);
-        addCommentBlock.setTranslationY(100);
+        addCommentBlock.setTranslationY(200);
 
         contentRoot.animate()
                 .scaleY(1)
@@ -113,14 +121,6 @@ public class CommentsActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.buttonSendComment)
-    public void onSendCommentClick() {
-        commentsAdapter.addItem();
-        commentsAdapter.setAnimationLocked(false);
-        commentsAdapter.setDelayEnterAnimation(false);
-        recyclerComments.smoothScrollBy(0, recyclerComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
-    }
-
     @Override
     public void onBackPressed() {
         contentRoot.animate()
@@ -134,5 +134,27 @@ public class CommentsActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+    }
+
+    @Override
+    public void onSendClickListener(View v) {
+        if (!validateComment()) {
+            return;
+        }
+        commentsAdapter.addItem();
+        commentsAdapter.setAnimationLocked(false);
+        commentsAdapter.setDelayEnterAnimation(false);
+        recyclerComments.smoothScrollBy(0, recyclerComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
+
+        editComment.setText(null);
+        buttonSend.setCurrentState(SendCommentButton.STATE_DONE);
+    }
+
+    private boolean validateComment() {
+        if (TextUtils.isEmpty(editComment.getText())) {
+            buttonSend.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake_error));
+            return false;
+        }
+        return true;
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import butterknife.Bind;
@@ -15,7 +16,7 @@ import io.github.gshockv.instamaterialsample.R;
 import io.github.gshockv.instamaterialsample.Utils;
 import io.github.gshockv.instamaterialsample.ui.view.SquareImageView;
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHolder> implements View.OnClickListener {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHolder> {
 
     private static final int DEFAULT_ITEMS_COUNT = 25;
     private static final int ANIMATED_ITEMS_COUNT = 2;
@@ -37,7 +38,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
     }
 
     @Override
-    public void onBindViewHolder(CellFeedViewHolder holder, int position) {
+    public void onBindViewHolder(final CellFeedViewHolder holder, final int position) {
         runEnterAnimation(holder.itemView, position);
         if (position % 2 == 0) {
             holder.imageViewFeedCenter.setImageResource(R.drawable.img_feed_center_1);
@@ -47,8 +48,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
             holder.imageViewFeedBottom.setImageResource(R.drawable.img_feed_bottom_2);
         }
 
-        holder.imageViewFeedBottom.setOnClickListener(this);
-        holder.imageViewFeedBottom.setTag(position);
+        holder.buttonComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onFeedItemClickListener != null) {
+                    onFeedItemClickListener.onCommentsClick(holder.itemView, position);
+                }
+            }
+        });
     }
 
     private void runEnterAnimation(View view, int position) {
@@ -81,16 +88,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
         this.onFeedItemClickListener = listener;
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.imageViewFeedBottom) {
-            if (onFeedItemClickListener != null) {
-                onFeedItemClickListener.onCommentsClick(view, (Integer) view.getTag());
-            }
-        }
-    }
-
     public static class CellFeedViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.buttonLike) ImageButton buttonLike;
+        @Bind(R.id.buttonComments) ImageButton buttonComments;
 
         @Bind(R.id.imageViewFeedCenter) SquareImageView imageViewFeedCenter;
         @Bind(R.id.imageViewFeedBottom) ImageView imageViewFeedBottom;
