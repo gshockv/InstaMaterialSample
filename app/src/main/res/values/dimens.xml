@@ -4,5 +4,6 @@
     <dimen name="btnFabSize">56dp</dimen>
     <dimen name="btnFabMargins">16dp</dimen>
     <dimen name="defaultElevation">8dp</dimen>
+    <dimen name="commentAvatarSize">56dp</dimen>
 
 </resources>

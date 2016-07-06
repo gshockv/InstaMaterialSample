@@ -1,21 +1,27 @@
-package io.github.gshockv.instamaterialsample;
+package io.github.gshockv.instamaterialsample.ui.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.gshockv.instamaterialsample.ui.FeedAdapter;
+import io.github.gshockv.instamaterialsample.R;
+import io.github.gshockv.instamaterialsample.Utils;
+import io.github.gshockv.instamaterialsample.ui.OnFeedItemClickListener;
 
-public class MainActivity extends AppCompatActivity {
+public class FeedActivity extends AppCompatActivity implements OnFeedItemClickListener {
 
     private static final int TOOLBAR_ANIMATION_DURATION = 300;
 
@@ -31,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_feed);
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerFeed.setLayoutManager(new LinearLayoutManager(this));
         feedAdapter = new FeedAdapter(this);
         recyclerFeed.setAdapter(feedAdapter);
-        //feedAdapter.updateItems();
+        feedAdapter.setOnFeedItemClickListener(this);
     }
 
     private void setupToolbar() {
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.feed_menu, menu);
         menuItemInbox = menu.findItem(R.id.action_inbox);
         menuItemInbox.setActionView(R.layout.menu_item_inbox);
 
@@ -105,6 +111,18 @@ public class MainActivity extends AppCompatActivity {
                 .setDuration(TOOLBAR_ANIMATION_DURATION)
                 .start();
         feedAdapter.updateItems();
+    }
+
+    @Override
+    public void onCommentsClick(View view, int position) {
+        final Intent intent = new Intent(FeedActivity.this, CommentsActivity.class);
+
+        int[] startingLocation = new int[2];
+        view.getLocationOnScreen(startingLocation);
+        intent.putExtra(CommentsActivity.ARG_DRAWING_START_LOCATION, startingLocation[1]);
+
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 }
 

@@ -7,4 +7,5 @@
 
     <color name="buttonDefaultLightNormal">#00000000</color>
     <color name="buttonDefaultLightPressed">#40ffffff</color>
+    <color name="bgComments">#ffffff</color>
 </resources>

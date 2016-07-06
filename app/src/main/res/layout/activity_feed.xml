@@ -6,13 +6,14 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.FeedActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/appToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/defaultElevation">
 
         <ImageView
             android:id="@+id/imageViewLogo"
