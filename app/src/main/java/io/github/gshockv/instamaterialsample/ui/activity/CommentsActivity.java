@@ -18,11 +18,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.facebook.rebound.ui.Util;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.github.gshockv.instamaterialsample.R;
 import io.github.gshockv.instamaterialsample.Utils;
 import io.github.gshockv.instamaterialsample.ui.CommentsAdapter;
@@ -76,7 +73,7 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
     private void startIntroAnimation() {
         contentRoot.setScaleY(0.1f);
         contentRoot.setPivotY(drawingStartLocation);
-        addCommentBlock.setTranslationY(200);
+        addCommentBlock.setTranslationY(100);
 
         contentRoot.animate()
                 .scaleY(1)

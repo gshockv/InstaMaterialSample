@@ -52,7 +52,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
             @Override
             public void onClick(View view) {
                 if (onFeedItemClickListener != null) {
-                    onFeedItemClickListener.onCommentsClick(holder.itemView, position);
+                    onFeedItemClickListener.onCommentsClick(holder.buttonComments, position);
                 }
             }
         });
