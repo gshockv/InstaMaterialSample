@@ -25,6 +25,7 @@
             android:id="@+id/imageViewFeedCenter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             tools:src="@drawable/img_feed_center_2"/>
 
         <ImageView

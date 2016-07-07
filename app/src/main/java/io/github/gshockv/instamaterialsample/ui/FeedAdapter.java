@@ -40,12 +40,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
     @Override
     public void onBindViewHolder(final CellFeedViewHolder holder, final int position) {
         runEnterAnimation(holder.itemView, position);
-        if (position % 2 == 0) {
+        int division = position % 3;
+        if (division == 0) {
             holder.imageViewFeedCenter.setImageResource(R.drawable.img_feed_center_1);
             holder.imageViewFeedBottom.setImageResource(R.drawable.img_feed_bottom_1);
-        } else {
+        } else if (division == 1) {
             holder.imageViewFeedCenter.setImageResource(R.drawable.img_feed_center_2);
             holder.imageViewFeedBottom.setImageResource(R.drawable.img_feed_bottom_2);
+        } else {
+            holder.imageViewFeedCenter.setImageResource(R.drawable.img_feed_center_3);
+            holder.imageViewFeedBottom.setImageResource(R.drawable.img_feed_bottom_1);
         }
 
         holder.buttonComments.setOnClickListener(new View.OnClickListener() {
