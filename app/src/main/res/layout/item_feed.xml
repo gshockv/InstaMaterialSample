@@ -37,21 +37,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="#fcfcfc"
             android:paddingLeft="8dp"
             android:paddingRight="8dp">
 
             <ImageButton
                 android:id="@+id/buttonLike"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_feed_action"
+                style="@style/feedActionButton"
                 android:src="@drawable/ic_heart_outline_grey"/>
             <ImageButton
                 android:id="@+id/buttonComments"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_feed_action"
+                style="@style/feedActionButton"
                 android:src="@drawable/ic_comment_outline_grey"/>
+            <ImageButton
+                android:id="@+id/buttonMore"
+                style="@style/feedActionButton"
+                android:src="@drawable/ic_more"/>
 
         </LinearLayout>
 

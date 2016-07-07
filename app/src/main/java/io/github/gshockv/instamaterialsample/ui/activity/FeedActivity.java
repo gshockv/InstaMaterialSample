@@ -16,10 +16,12 @@ import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.github.gshockv.instamaterialsample.ui.FeedAdapter;
 import io.github.gshockv.instamaterialsample.R;
 import io.github.gshockv.instamaterialsample.Utils;
+import io.github.gshockv.instamaterialsample.ui.FeedAdapter;
 import io.github.gshockv.instamaterialsample.ui.OnFeedItemClickListener;
+import io.github.gshockv.instamaterialsample.ui.view.FeedContextMenu;
+import io.github.gshockv.instamaterialsample.ui.view.FeedContextMenuManager;
 
 public class FeedActivity extends AppCompatActivity implements OnFeedItemClickListener {
 
@@ -58,8 +60,14 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
 
         recyclerFeed.setLayoutManager(lm);
         feedAdapter = new FeedAdapter(this);
-        recyclerFeed.setAdapter(feedAdapter);
         feedAdapter.setOnFeedItemClickListener(this);
+        recyclerFeed.setAdapter(feedAdapter);
+        recyclerFeed.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                FeedContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     private void setupToolbar() {
@@ -135,6 +143,25 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
     @Override
     public void onLikeClick(View view, int position) {
         // Coming soon . . .
+    }
+
+    @Override
+    public void onMoreClick(View view, int position) {
+        final FeedContextMenuManager manager = FeedContextMenuManager.getInstance();
+
+        FeedContextMenu.ContextMenuClickListener menuListener = new FeedContextMenu.ContextMenuClickListener() {
+            @Override
+            public void onItemClick(int feedItem) {
+                manager.hideContextMenu();
+            }
+
+            @Override
+            public void onCancelClick(int feedItem) {
+                manager.hideContextMenu();
+            }
+        };
+
+        manager.toggleContextMenuFromView(view, position, menuListener);
     }
 }
 

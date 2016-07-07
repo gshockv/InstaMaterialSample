@@ -56,6 +56,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
                 }
             }
         });
+        holder.buttonMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onFeedItemClickListener != null) {
+                    onFeedItemClickListener.onMoreClick(holder.buttonMore, position);
+                }
+            }
+        });
     }
 
     private void runEnterAnimation(View view, int position) {
@@ -91,6 +99,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
     public static class CellFeedViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.buttonLike) ImageButton buttonLike;
         @Bind(R.id.buttonComments) ImageButton buttonComments;
+        @Bind(R.id.buttonMore) ImageButton buttonMore;
 
         @Bind(R.id.imageViewFeedCenter) SquareImageView imageViewFeedCenter;
         @Bind(R.id.imageViewFeedBottom) ImageView imageViewFeedBottom;
