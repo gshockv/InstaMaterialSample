@@ -12,5 +12,6 @@
     <color name="bgComments">#ffffff</color>
     <color name="buttonSendNormal">#26c714</color>
     <color name="buttonSendPressed">#1f9612</color>
+    <color name="likesCounterTextColor">#4d86bf</color>
 
 </resources>

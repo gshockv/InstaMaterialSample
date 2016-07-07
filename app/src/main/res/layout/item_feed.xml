@@ -21,12 +21,33 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_feed_top"/>
 
-        <io.github.gshockv.instamaterialsample.ui.view.SquareImageView
-            android:id="@+id/imageViewFeedCenter"
+        <io.github.gshockv.instamaterialsample.ui.view.SquareFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/img_feed_center_2"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewFeedCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/img_feed_center_2"/>
+
+            <View
+                android:id="@+id/view_like_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_like_circle_background"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imageViewLike"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_heart_outline_white"
+                android:visibility="invisible"/>
+
+        </io.github.gshockv.instamaterialsample.ui.view.SquareFrameLayout>
 
         <ImageView
             android:id="@+id/imageViewFeedBottom"
@@ -54,6 +75,41 @@
                 android:id="@+id/buttonMore"
                 style="@style/feedActionButton"
                 android:src="@drawable/ic_more"/>
+
+            <!-- likes -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_heart_small_blue"/>
+
+                <TextSwitcher
+                    android:id="@+id/textSwitcherCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:inAnimation="@anim/slide_in_likes_counter"
+                    android:outAnimation="@anim/slide_out_likes_counter">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123 likes"
+                        android:textColor="@color/likesCounterTextColor"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/likesCounterTextColor"/>
+
+                </TextSwitcher>
+            </LinearLayout>
 
         </LinearLayout>
 
