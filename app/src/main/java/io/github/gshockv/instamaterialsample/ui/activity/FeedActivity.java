@@ -4,18 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import io.github.gshockv.instamaterialsample.R;
 import io.github.gshockv.instamaterialsample.Utils;
 import io.github.gshockv.instamaterialsample.ui.FeedAdapter;
@@ -23,16 +19,13 @@ import io.github.gshockv.instamaterialsample.ui.OnFeedItemClickListener;
 import io.github.gshockv.instamaterialsample.ui.view.FeedContextMenu;
 import io.github.gshockv.instamaterialsample.ui.view.FeedContextMenuManager;
 
-public class FeedActivity extends AppCompatActivity implements OnFeedItemClickListener {
+public class FeedActivity extends BaseActivity implements OnFeedItemClickListener {
 
     private static final int TOOLBAR_ANIMATION_DURATION = 300;
 
-    @Bind(R.id.imageViewLogo) ImageView imageViewLogo;
-    @Bind(R.id.appToolbar) Toolbar appToolbar;
     @Bind(R.id.recycler_feed) RecyclerView recyclerFeed;
     @Bind(R.id.fabCreate) ImageView buttonCreate;
 
-    private MenuItem menuItemInbox;
     private FeedAdapter feedAdapter;
     private boolean pendingIntroAnimation;
 
@@ -40,13 +33,11 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
             pendingIntroAnimation = true;
         }
 
-        setupToolbar();
         setupFeed();
     }
 
@@ -70,16 +61,10 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
         });
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(appToolbar);
-        appToolbar.setNavigationIcon(R.drawable.ic_menu_white);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.feed_menu, menu);
-        menuItemInbox = menu.findItem(R.id.action_inbox);
-        menuItemInbox.setActionView(R.layout.menu_item_inbox);
+        super.onCreateOptionsMenu(menu);
 
         if (pendingIntroAnimation) {
             pendingIntroAnimation = false;
@@ -93,15 +78,15 @@ public class FeedActivity extends AppCompatActivity implements OnFeedItemClickLi
         buttonCreate.setTranslationY(2 * getResources().getDimensionPixelOffset(R.dimen.btnFabSize));
 
         int actionBarSize = Utils.dpToPx(56);
-        appToolbar.setTranslationY(-actionBarSize);
-        imageViewLogo.setTranslationY(-actionBarSize);
+        toolbar.setTranslationY(-actionBarSize);
+        imageLogo.setTranslationY(-actionBarSize);
         menuItemInbox.getActionView().setTranslationY(-actionBarSize);
 
-        appToolbar.animate()
+        toolbar.animate()
                 .translationY(0)
                 .setDuration(TOOLBAR_ANIMATION_DURATION)
                 .setStartDelay(300);
-        imageViewLogo.animate()
+        imageLogo.animate()
                 .translationY(0)
                 .setDuration(TOOLBAR_ANIMATION_DURATION)
                 .setStartDelay(300);
