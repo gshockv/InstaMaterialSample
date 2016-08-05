@@ -74,6 +74,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
         updateLikesCounter(holder, false);
         updateHeartButton(holder, false);
 
+        holder.imageViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onFeedItemClickListener != null) {
+                    onFeedItemClickListener.onProfileClick(holder.imageViewProfile);
+                }
+            }
+        });
+
         holder.buttonComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,6 +286,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CellFeedViewHo
     }
 
     public static class CellFeedViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.imageViewProfile) ImageView imageViewProfile;
         @Bind(R.id.imageViewFeedCenter) ImageView imageViewFeedCenter;
         @Bind(R.id.imageViewFeedBottom) ImageView imageViewFeedBottom;
 

@@ -17,9 +17,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/imageViewProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_feed_top"/>
+            android:src="@drawable/ic_feed_top"
+            android:clickable="true"/>
 
         <io.github.gshockv.instamaterialsample.ui.view.SquareFrameLayout
             android:layout_width="match_parent"

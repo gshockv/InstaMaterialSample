@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import io.github.gshockv.instamaterialsample.R;
@@ -111,6 +112,11 @@ public class FeedActivity extends BaseActivity implements OnFeedItemClickListene
                 .setDuration(TOOLBAR_ANIMATION_DURATION)
                 .start();
         feedAdapter.updateItems();
+    }
+
+    @Override
+    public void onProfileClick(View view) {
+        Toast.makeText(this, "Coming Soon...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
