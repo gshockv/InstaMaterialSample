@@ -25,7 +25,7 @@ import io.github.gshockv.instamaterialsample.ui.view.SendCommentButton;
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener {
     static final String ARG_DRAWING_START_LOCATION = "arg.drawing.start.location";
 
-    @Bind(R.id.recycler_comments) RecyclerView recyclerComments;
+    @Bind(R.id.recyclerComments) RecyclerView recyclerComments;
     @Bind(R.id.contentRoot) LinearLayout contentRoot;
     @Bind(R.id.addCommentBlock) LinearLayout addCommentBlock;
     @Bind(R.id.editComment) EditText editComment;

@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.CommentsActivityTheme" parent="AppTheme">
+    <style name="AppTheme.TransparentTheme" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>

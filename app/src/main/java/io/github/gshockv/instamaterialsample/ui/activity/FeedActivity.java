@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import butterknife.Bind;
 import io.github.gshockv.instamaterialsample.R;
@@ -24,7 +23,7 @@ public class FeedActivity extends BaseActivity implements OnFeedItemClickListene
 
     private static final int TOOLBAR_ANIMATION_DURATION = 300;
 
-    @Bind(R.id.recycler_feed) RecyclerView recyclerFeed;
+    @Bind(R.id.recyclerFeed) RecyclerView recyclerFeed;
     @Bind(R.id.fabCreate) ImageView buttonCreate;
 
     private FeedAdapter feedAdapter;
@@ -116,7 +115,11 @@ public class FeedActivity extends BaseActivity implements OnFeedItemClickListene
 
     @Override
     public void onProfileClick(View view) {
-        Toast.makeText(this, "Coming Soon...", Toast.LENGTH_SHORT).show();
+        int[] startingLocation = new int[2];
+        view.getLocationOnScreen(startingLocation);
+        startingLocation[0] += view.getWidth() / 2;
+        UserProfileActivity.startUserProfileFromLocation(this, startingLocation);
+        overridePendingTransition(0, 0);
     }
 
     @Override
